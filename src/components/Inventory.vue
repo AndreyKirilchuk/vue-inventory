@@ -3,7 +3,8 @@ import Box from '@/components/Box.vue'
 import Modal from '@/components/Modal.vue'
 import { reactive, ref } from 'vue'
 
-const items = reactive([
+
+const items = reactive(JSON.parse(localStorage.getItem('items')) ?? [
   {
     id: 1,
     img: '/item1.svg',
@@ -129,7 +130,7 @@ const items = reactive([
     img: '',
     quantity: 0
   }
-])
+] ?? localStorage.getItem(JSON.parse('items')))
 
 const modalActive = ref(false)
 const itemModal = ref({ id: '1', img: '/item1.svg', quantity: 1 })
@@ -151,15 +152,28 @@ const openModal = (id) => {
 
 const closeModal = () => {
   modalActive.value = false
-  itemModal.value = ''
 }
 
-const deleteItem = (id, qunatityRemove) => {
-  itemModal.quantity - qunatityRemove
-  if (itemModal.quantity === 0) {
-    itemModal.img = ''
+const deleteItem = (quantityRemove) => {
+  const item = items.find((i) => i.id === itemModal.value.id);
+  if (item) {
+    item.quantity -= quantityRemove;
+    if (item.quantity <= 0) {
+      item.img = '';
+      item.quantity = 0;
+
+      closeModal()
+    }
   }
+
+};
+
+const saveItems = () => {
+  localStorage.setItem('items', JSON.stringify(items))
 }
+
+window.addEventListener('beforeunload', saveItems)
+
 </script>
 
 <template>
@@ -177,7 +191,7 @@ const deleteItem = (id, qunatityRemove) => {
     <Modal
       :modalActive="modalActive"
       :img="itemModal.img"
-      :quantity="itemModal.quantity"
+      :itemQuantity="itemModal.quantity"
       @deleteItem="deleteItem"
       @closeModal="closeModal"
     />
@@ -190,7 +204,7 @@ const deleteItem = (id, qunatityRemove) => {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border: 1px solid #4d4d4d;
+  border: 1px solid var(--var--elborder);
   position: relative;
   overflow: hidden;
 }

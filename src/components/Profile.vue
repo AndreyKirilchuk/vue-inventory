@@ -26,10 +26,10 @@ const stubs = [
 
 <style scoped>
 aside {
-  background: #262626;
+  background: var(--var--elbackground);
   padding: 18px 14px;
   border-radius: 12px;
-  border: 1px solid #4d4d4d;
+  border: 1px solid var(--var--elborder);
 }
 
 .avatar {

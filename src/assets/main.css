@@ -1,5 +1,5 @@
 body {
-  background: #1d1d1d;
+  background: var(--var--bodycolor)
 }
 
 .container {
@@ -9,12 +9,13 @@ body {
 }
 
 * {
+  outline: none;
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
 
 .skeleton {
-  background: linear-gradient(to right, #3c3c3c, #444444, #333333);
+  background: linear-gradient(to right, var(--var--gradientone), var(--var--gradienttwo), var(--var--gradientthree));
   background-size: 200% 100%;
   animation: gradientAnimation 4s ease infinite;
 }
@@ -38,4 +39,39 @@ body {
 
 .cross:hover {
   transform: scale(0.95);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+:root{
+  --var--bodycolor: #1d1d1d;
+  --var--elcolor:white;
+  --var--elbackground: #262626;
+  --var--elborder:#4d4d4d;
+  --var--gradientone: #3C3C3C;
+  --var--gradienttwo:#444444;
+  --var--gradientthree: #333333;
+  --var--hoverbackground:#2F2F2F;
+  --var--boxcolor:#c2c2c2;
+  --var--modalbackground:rgba(38, 38, 38, 0.5),
+}
+[light]{
+  --var--bodycolor:#FFFFFF;
+  --var--elcolor:black;
+  --var--elbackground: #ffffff;
+  --var--elborder: #d3d3d3;
+  --var--gradientone: #f0f0f0;
+  --var--gradienttwo: #e0e0e0;
+  --var--gradientthree: #fafafa;
+  --var--hoverbackground: #f5f5f5;
+  --var--boxcolor:black;
+  --var--modalbackground:rgba(255,255,255,0.5),
 }

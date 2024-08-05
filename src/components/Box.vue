@@ -16,6 +16,12 @@ const onDrop = (event) => {
   emitEvent('dropItem', draggedId, props.id)
   event.dataTransfer.clearData()
 }
+
+const openModal = (id) => {
+  if(props.img && props.quantity > 0){
+    emitEvent('openModal', id)
+  }
+}
 </script>
 
 <template>
@@ -25,6 +31,8 @@ const onDrop = (event) => {
     @dragstart="onDragStart"
     @dragover.prevent
     @drop="onDrop"
+    :class="{'box-hover': img && quantity > 0}"
+    @click="openModal(id)"
   >
     <img
       :src="img"
@@ -32,7 +40,6 @@ const onDrop = (event) => {
       width="54px"
       v-if="img"
       draggable="false"
-      @click="emitEvent('openModal', id)"
     />
 
     <div class="quantity_container" v-if="quantity">
@@ -43,9 +50,18 @@ const onDrop = (event) => {
 
 <style scoped>
 .box {
-  border: 1px solid #4d4d4d;
-  background-color: #262626;
+  border: 1px solid var(--var--elborder);
+  background-color: var(--var--elbackground);
   position: relative;
+  transition: 0.3s;
+}
+
+.box-hover{
+  cursor: pointer;
+}
+
+.box-hover:hover{
+  background: var(--var--hoverbackground);
 }
 
 .dragging {
@@ -55,7 +71,6 @@ const onDrop = (event) => {
 .box img {
   position: absolute;
   transform: translate(50%, 50%);
-  cursor: pointer;
 }
 
 .box:nth-child(1) {
@@ -79,13 +94,13 @@ const onDrop = (event) => {
   right: 0;
   bottom: 0;
   border-top-left-radius: 6px;
-  border-left: 2px solid #4d4d4d;
-  border-top: 2px solid #4d4d4d;
+  border-left: 2px solid var(--var--elborder);
+  border-top: 2px solid var(--var--elborder);
   width: 16px;
   height: 16px;
   display: flex;
   justify-content: center;
   font-size: 10px;
-  color: #c2c2c2;
+  color: var(--var--boxcolor);
 }
 </style>

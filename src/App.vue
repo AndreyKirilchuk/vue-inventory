@@ -1,13 +1,15 @@
 <script setup>
 import Profile from '@/components/Profile.vue'
 import Inventory from '@/components/Inventory.vue'
-import Footer from './components/Carbon.vue'
 import Carbon from '@/components/Carbon.vue'
+import Changetheme from '@/components/Change-theme.vue'
+
+
 </script>
 
 <template>
   <div class="container">
-    <div class="container_inner">
+
       <main>
         <profile />
 
@@ -15,7 +17,8 @@ import Carbon from '@/components/Carbon.vue'
       </main>
 
       <Carbon />
-    </div>
+
+      <Changetheme/>
   </div>
 </template>
 
